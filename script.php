@@ -2,7 +2,7 @@
 
     $(document).ready(function() {
 
-		$.ajax({
+        $.ajax({
             url: 'mostra.php',
             type: 'POST',
             data: {
@@ -10,36 +10,11 @@
                 tipo: $("#tipo").val(),
             },
             success: function(data) {
-            	$('#tfazer').html(data);
-            	function delfeito(id) {
-                    alert(id);
-                    $.ajax({
-						
-                        url: 'delete.php',
-                        type: 'POST',
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            $.ajax({
-                                url: 'mostra.php',
-                                type: 'POST',
-                                data: {
-                                    atividade: $("#atividade_input").val(),
-                                    tipo: $("#tipo").val(),
-                                },
-                                success: function(data) {
-                                    $('#tfazer').html(data);
-                                },
-                            });
-                        }
-                    });
-                };
+                $('#tfazer').html(data);
             }
         });
-		
 
-				
+
 
 
         $.ajax({
@@ -50,35 +25,12 @@
                 tipo: $("#tipo").val(),
             },
             success: function(data) {
-            	$('#tfazendo').html(data);
-                function delfazendo(id) {
-                    alert(id);
-                    $.ajax({
-                        url: 'delete.php',
-                        type: 'POST',
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            $.ajax({
-                                url: 'mostra2.php',
-                                type: 'POST',
-                                data: {
-                                    atividade: $("#atividade_input").val(),
-                                    tipo: $("#tipo").val(),
-                                },
-                                success: function(data) {
-                                    $('#tfazendo').html(data);
-                                },
-                            });
-                        }
-                    });
-                };
+                $('#tfazendo').html(data);
             }
         });
-		
-       
-		$.ajax({
+
+
+        $.ajax({
             url: 'mostra3.php',
             type: 'POST',
             data: {
@@ -86,31 +38,7 @@
                 tipo: $("#tipo").val(),
             },
             success: function(data) {
-            	$('#tfeito').html(data);
-                function delfeito(id) {
-                    alert(id);
-                    $.ajax({
-						
-                        url: 'delete.php',
-                        type: 'POST',
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            $.ajax({
-                                url: 'mostra3.php',
-                                type: 'POST',
-                                data: {
-                                    atividade: $("#atividade_input").val(),
-                                    tipo: $("#tipo").val(),
-                                },
-                                success: function(data) {
-                                    $('#tfeito').html(data);
-                                },
-                            });
-                        }
-                    });
-                };
+                $('#tfeito').html(data);
             }
         });
 
@@ -126,8 +54,9 @@
                     tipo: $("#tipo").val(),
                 },
                 success: function(data) {
+                	alertify.success('Atividade Adicionada em FEITO');
                     $.ajax({
-                        url: 'insertfeito.php',
+                        url: 'mostra3.php',
                         type: 'POST',
                         data: {
                             atividade: $("#atividade_input").val(),
@@ -159,8 +88,9 @@
                     tipo: $("#tipo").val(),
                 },
                 success: function(data) {
+                	alertify.success('Atividade Adicionada em FAZENDO');
                     $.ajax({
-                        url: 'insertfazendo.php',
+                        url: 'mostra2.php',
                         type: 'POST',
                         data: {
                             atividade: $("#atividade_input").val(),
@@ -191,8 +121,9 @@
                     tipo: $("#tipo").val(),
                 },
                 success: function(data) {
+                	alertify.success('Atividade Adicionada em FAZER');
                     $.ajax({
-                        url: 'insertfazer.php',
+                        url: 'mostra.php',
                         type: 'POST',
                         data: {
                             atividade: $("#atividade_input").val(),
@@ -230,33 +161,8 @@
 
 
 
-function delfeito(id) {
-    alert(id);
-    $.ajax({
-        url: 'delete.php',
-        type: 'POST',
-        data: {
-            id: id
-        },
-        success: function(data) {
-            $.ajax({
-                url: 'insertfeito.php',
-                type: 'POST',
-                data: {
-                    atividade: $("#atividade_input").val(),
-                    tipo: $("#tipo").val(),
-                },
-                success: function(data) {
-                    $('#tfeito').html(data);
-                },
-            });
-        }
-    });
-};
-
 
 function delfazendo(id) {
-    alert(id);
     $.ajax({
         url: 'delete.php',
         type: 'POST',
@@ -265,7 +171,7 @@ function delfazendo(id) {
         },
         success: function(data) {
             $.ajax({
-                url: 'insertfazendo.php',
+                url: 'mostra2.php',
                 type: 'POST',
                 data: {
                     atividade: $("#atividade_input").val(),
@@ -273,6 +179,7 @@ function delfazendo(id) {
                 },
                 success: function(data) {
                     $('#tfazendo').html(data);
+                    alertify.success('Deletado com Sucesso!');
                 },
             });
         }
@@ -282,7 +189,6 @@ function delfazendo(id) {
 
 
 function delfazer(id) {
-    alert(id);
     $.ajax({
         url: 'delete.php',
         type: 'POST',
@@ -291,7 +197,7 @@ function delfazer(id) {
         },
         success: function(data) {
             $.ajax({
-                url: 'insertfazer.php',
+                url: 'mostra.php',
                 type: 'POST',
                 data: {
                     atividade: $("#atividade_input").val(),
@@ -299,6 +205,7 @@ function delfazer(id) {
                 },
                 success: function(data) {
                     $('#tfazer').html(data);
+                    alertify.success('Deletado com Sucesso!');
                 },
             });
         }
@@ -306,30 +213,275 @@ function delfazer(id) {
 };
 
 
+function delfeito(id) {
+    $.ajax({
+        url: 'delete.php',
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function(data) {
+            $.ajax({
+                url: 'mostra3.php',
+                type: 'POST',
+                data: {
+                    atividade: $("#atividade_input").val(),
+                    tipo: $("#tipo").val(),
+                },
+                success: function(data) {
+                    $('#tfeito').html(data);
+                    alertify.success('Deletado com Sucesso!');
+                },
+            });
+        }
+    });
+};
+
+//FUNÇÃO PARA EDITAR
+
+function editfazer(id) {
+    $.ajax({
+        url: 'edit.php',
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function(data) {
+        	alertify.success('Movido para FAZENDO');
+            $.ajax({
+                url: 'mostra.php',
+                type: 'POST',
+                data: {
+                    atividade: $("#atividade_input").val(),
+                    tipo: $("#tipo").val(),
+                },
+                success: function(data) {
+                    $.ajax({
+                        url: 'mostra.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazer').html(data);
+                        }
+                    });
 
 
 
+                    $.ajax({
+                        url: 'mostra2.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazendo').html(data);
+                        }
+                    });
+
+
+                    $.ajax({
+                        url: 'mostra3.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfeito').html(data);
+                        }
+                    });
+                },
+            });
+        }
+    });
+};
+
+
+function editesquerda(id) {
+    $.ajax({
+        url: 'edit2.php',
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function(data) {
+        	alertify.success('Movido para FAZER');
+            $.ajax({
+                url: 'mostra2.php',
+                type: 'POST',
+                data: {
+                    atividade: $("#atividade_input").val(),
+                    tipo: $("#tipo").val(),
+                },
+                success: function(data) {
+                    $.ajax({
+                        url: 'mostra.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazer').html(data);
+                        }
+                    });
 
 
 
+                    $.ajax({
+                        url: 'mostra2.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazendo').html(data);
+                        }
+                    });
 
 
+                    $.ajax({
+                        url: 'mostra3.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfeito').html(data);
+                        }
+                    });
+                },
+            });
+        }
+    });
+};
 
 
+function editdireita(id) {
+    $.ajax({
+        url: 'edit2.1.php',
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function(data) {
+        	alertify.success('Movido para FEITO');
+            $.ajax({
+                url: 'mostra2.php',
+                type: 'POST',
+                data: {
+                    atividade: $("#atividade_input").val(),
+                    tipo: $("#tipo").val(),
+                },
+                success: function(data) {
+                    $.ajax({
+                        url: 'mostra.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazer').html(data);
+                        }
+                    });
 
 
+                    $.ajax({
+                        url: 'mostra2.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazendo').html(data);
+                        }
+                    });
 
 
+                    $.ajax({
+                        url: 'mostra3.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfeito').html(data);
+                        }
+                    });
+                },
+            });
+        }
+    });
+};
 
 
+function editfeito(id) {
+    $.ajax({
+        url: 'edit3.php',
+        type: 'POST',
+        data: {
+            id: id
+        },
+        success: function(data) {
+        	alertify.success('Movido para FAZENDO');
+            $.ajax({
+                url: 'mostra3.php',
+                type: 'POST',
+                data: {
+                    atividade: $("#atividade_input").val(),
+                    tipo: $("#tipo").val(),
+                },
+                success: function(data) {
+                    $.ajax({
+                        url: 'mostra.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazer').html(data);
+                        }
+                    });
+
+                    $.ajax({
+                        url: 'mostra2.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfazendo').html(data);
+                        }
+                    });
 
 
-
-
-
-
-
-
+                    $.ajax({
+                        url: 'mostra3.php',
+                        type: 'POST',
+                        data: {
+                            atividade: $("#atividade_input").val(),
+                            tipo: $("#tipo").val(),
+                        },
+                        success: function(data) {
+                            $('#tfeito').html(data);
+                        }
+                    });
+                },
+            });
+        }
+    });
+};
 
 
 </script>
