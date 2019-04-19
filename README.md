@@ -173,6 +173,7 @@
 							<th><i class="fas fa-briefcase"></i></th>
 							<th>DEL</th>
 							<th>EDIT</th>
+							<th>EDIT</th>
 						</tr>
 					</thead>
 					<tbody id="tfazendo">
